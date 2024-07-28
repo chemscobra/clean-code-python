@@ -1,0 +1,99 @@
+line-length = 88
+show-fixes = true
+output-format = "full"
+target-version = "py312"
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+    "alembic",
+    ".idea",
+    ".vscode",
+]
+
+# https://docs.astral.sh/ruff/rules/#rules
+[lint]
+# Got from fastapi
+select = [
+    "D",
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C4", # flake8-comprehensions
+    "UP", # pyupgrade
+]
+ignore = [
+    "E501", # line too long, handled by black
+    "B008", # do not perform function calls in argument defaults
+    "C901", # too complex
+    "D104",
+    "D100",
+]
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[lint.pylint]
+max-returns = 7
+
+[lint.per-file-ignores]
+"**/test*/**/*.py" = [
+    "ANN001",
+    "ANN201",
+    "BLE001",
+    "D100",
+    "D101",
+    "D103",
+    "N802",
+    "PT017",
+    "S101",
+    "T201",
+    "PLR2004",
+    "INP001",
+]
+
+[lint.pydocstyle]
+convention = "pep257"
+
+
+[lint.mccabe]
+max-complexity = 10
+
+[format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+docstring-code-line-length = "dynamic"
+skip-magic-trailing-comma = false
+docstring-code-format = true

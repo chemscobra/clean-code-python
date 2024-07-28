@@ -1,0 +1,66 @@
+[project]
+name = "clean_python"
+version = "0.1.0"
+description = "Code Cleanliness with Python"
+authors = [{ name = "Gustavo Leon", email = "gleondiaz@gmail.com" }]
+dependencies = [
+    "fastapi>=0.111.1",
+    "python-dotenv>=1.0.1",
+    "alembic>=1.13.2",
+    "sqlalchemy>=2.0.31",
+    "psycopg-binary>=3.2.1",
+]
+requires-python = ">=3.12"
+readme = "README.md"
+license = { text = "MIT" }
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = true
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "pytest>=8.3.2",
+    "ruff>=0.5.3",
+    "mypy>=1.10.1",
+    "pytest-cov>=5.0.0",
+    "pre-commit>=3.7.1",
+    "pytest-postgresql>=6.0.0",
+    "pytest-asyncio>=0.23.8",
+]
+
+[tool.pdm.scripts]
+_.env_file = ".env"
+dev = "fastapi dev ./src/clean_python/main.py --reload"
+prod = "fastapi run ./src/clean_python/main.py"
+fix = "ruff check --fix"
+check = "ruff check"
+test = "pytest tests"
+coverage = "coverage xml"
+test-coverage = "pytest --cov-report xml --cov=src tests/"
+pg-compose = "docker-compose -f orchestration/postgres-compose.yml up -d"
+
+
+[tool.mypy]
+disallow_untyped_defs = true
+check_untyped_defs = true
+explicit_package_bases = true
+namespace_packages = true
+mypy_path = "./src:./tests"
+
+
+[tool.pytest.ini_options]
+pythonpath = [".", "src"]
+postgresql_host = "0.0.0.0"
+postgresql_user = "postgres"
+postgresql_password = "postgres"
+postgresql_dbname = "test_db"
+postgresql_port = 5432
+
+
+[tool.coverage.run]
+omit = ["tests/*"]

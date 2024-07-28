@@ -1,0 +1,8 @@
+{
+    "python.testing.pytestArgs": [
+        "tests",
+        "--cache-clear"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}

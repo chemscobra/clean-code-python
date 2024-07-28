@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgres:16.3-alpine
+    container_name: cp_postgres_container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      # Mnemotecnia en Español para recordar puertos Huevo:Crudo (Host:Container)
+      # Recuerda, si ya estás usando el puerto 5432 en tu host, es probable
+      # que necesites cambiar el puerto del host a otro (ej. 5433)
+      - "5432:5432"
+    volumes:
+      # Mapea el volumen 'postgres_data' al directorio de datos de PostgreSQL dentro del contenedor
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  # Define un volumen llamado 'postgres_data' para persistir los datos de PostgreSQL
+  postgres_data:

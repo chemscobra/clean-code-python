@@ -1,0 +1,27 @@
+# July 2023
+version: "2" # required to adjust maintainability checks
+
+checks:
+  file-lines:
+    config:
+      threshold: 88
+
+exclude_patterns:
+  - "**/tests/"
+  - ".github"
+
+plugins:
+  bandit:
+    enabled: true
+
+  duplication:
+    enabled: true
+    config:
+      languages:
+        python:
+          python_version: 3
+  pep8:
+    enabled: true
+
+  sonar-python:
+    enabled: true
