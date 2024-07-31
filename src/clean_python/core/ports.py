@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from .entities import BloodborneCharacterModel
+from src.clean_python.core.entities import BloodborneCharacterModel
 
 
 class BloodborneCharacterPort(ABC):
